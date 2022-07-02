@@ -38,7 +38,8 @@ const Home: NextPage = () => {
         <Button.Info variant="soft">Soft</Button.Info>
         <Button.Info variant="text">Text</Button.Info>
       </div>
-      <div className="mt-3 grid grid-cols-1 md:grid-cols-6 gap-4 justify-items-center">
+      <div className="mt-3 grid grid-cols-1 md:grid-cols-7 gap-4 justify-items-center">
+        <Button.Info rounded="none">Rounded none</Button.Info>
         <Button.Info rounded="sm">Rounded sm</Button.Info>
         <Button.Info rounded="md">Rounded md</Button.Info>
         <Button.Info rounded="lg">Rounded lg</Button.Info>

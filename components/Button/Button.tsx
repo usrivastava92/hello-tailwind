@@ -4,7 +4,7 @@ import { twMerge } from 'tailwind-merge';
 type ButtonShadowLevels = 'sm' | 'md' | 'lg' | 'xl' | '2xl';
 type ButtonHeights = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
 type ButtonWidths = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | 'full';
-type ButtonRoundedLevels = 'sm' | 'md' | 'lg' | 'xl' | '2xl' | 'full';
+type ButtonRoundedLevels = 'none' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | 'full';
 type ButtonVariants = 'bordered' | 'soft' | 'filled' | 'text';
 
 export interface ButtonProps {
@@ -222,10 +222,10 @@ export class Button {
   };
   static Base: React.FC<ButtonProps> = ({
     variant = 'filled',
+    rounded = 'md',
     height,
     width,
     children,
-    rounded,
     shadow,
     leftIcon,
     rightIcon,
