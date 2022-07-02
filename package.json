@@ -2,7 +2,9 @@
   "name": "hello-tailwind",
   "version": "0.1.0",
   "private": true,
+  "pre-commit": "prettier-format",
   "scripts": {
+    "prettier-format": "prettier --config .prettierrc './**/*.ts' './**/*.tsx' --write",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
