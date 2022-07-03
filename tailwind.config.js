@@ -1,11 +1,23 @@
+const colors = require('tailwindcss/colors');
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    './pages/**/*.{js,ts,jsx,tsx}',
-    './components/**/*.{js,ts,jsx,tsx}',
+    "./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
-    extend: {},
+    colors: {
+      primary: colors.blue,
+      secondary: colors.slate,
+      success: colors.green,
+      danger: colors.red,
+      warning: colors.yellow,
+      info: colors.blue
+    },
+    fontFamily: {
+      roboto: ['Roboto', 'sans-serif']
+    },
+    extend: {}
   },
   plugins: [
     require('@tailwindcss/typography'),
