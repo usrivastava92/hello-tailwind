@@ -61,33 +61,36 @@ export interface ButtonProps {
 }
 
 export const Button: React.FC<ButtonProps> = ({
-                                                theme = 'primary',
-                                                variant = 'filled',
-                                                rounded = 'md',
-                                                width,
-                                                height,
-                                                shadow,
-                                                themedShadow,
-                                                classes,
-                                                children,
-                                                onClick,
-                                                loadingStyle,
-                                                leftIcon,
-                                                rightIcon,
-                                                disabled,
-                                                loading
-                                              }) => {
+  theme = 'primary',
+  variant = 'filled',
+  rounded = 'md',
+  width,
+  height,
+  shadow,
+  themedShadow,
+  classes,
+  children,
+  onClick,
+  loadingStyle,
+  leftIcon,
+  rightIcon,
+  disabled,
+  loading
+}) => {
   return (
-    <button onClick={onClick} className={`${twMerge(
-      `flex justify-center items-center p-2 
+    <button
+      onClick={onClick}
+      className={`${twMerge(
+        `flex justify-center items-center p-2 
     ${getThemeClass(theme, variant)}
     ${getWidthClass(width)} 
     ${getHeightClass(height)} 
     ${getRoundedClass(rounded)} 
     ${getShadowClass(theme, themedShadow, shadow)} 
     `,
-      classes
-    )}`}>
+        classes
+      )}`}
+    >
       {children}
     </button>
   );
@@ -186,68 +189,68 @@ const getThemeClass = (theme: ButtonTheme, variant: ButtonVariants): string => {
 const getBorderColorClass = (theme: ButtonTheme): string => {
   switch (theme) {
     case 'primary':
-      return 'border-primary-500';
+      return 'border-primary-500 hover:ring-2 hover:ring-primary-400';
     case 'secondary':
-      return 'border-secondary-500';
+      return 'border-secondary-500 hover:ring-2 hover:ring-secondary-400';
     case 'success':
-      return 'border-success-500';
+      return 'border-success-500 hover:ring-2 hover:ring-success-400';
     case 'info':
-      return 'border-info-500';
+      return 'border-info-500 hover:ring-2 hover:ring-info-400';
     case 'warning':
-      return 'border-warning-500';
+      return 'border-warning-500 hover:ring-2 hover:ring-warning-400';
     case 'danger':
-      return 'border-danger-500';
+      return 'border-danger-500 hover:ring-2 hover:ring-danger-400';
   }
 };
 
 const getBgColorClass = (theme: ButtonTheme): string => {
   switch (theme) {
     case 'primary':
-      return 'bg-primary-500';
+      return 'bg-primary-500 hover:ring-2 hover:ring-primary-500';
     case 'secondary':
-      return 'bg-secondary-500';
+      return 'bg-secondary-500 hover:ring-2 hover:ring-secondary-500';
     case 'success':
-      return 'bg-success-500';
+      return 'bg-success-500 hover:ring-2 hover:ring-success-500';
     case 'info':
-      return 'bg-info-500';
+      return 'bg-info-500 hover:ring-2 hover:ring-info-500';
     case 'warning':
-      return 'bg-warning-500';
+      return 'bg-warning-500 hover:ring-2 hover:ring-warning-500';
     case 'danger':
-      return 'bg-danger-500';
+      return 'bg-danger-500 hover:ring-2 hover:ring-danger-500';
   }
 };
 
 const getTextColorClass = (theme: ButtonTheme): string => {
   switch (theme) {
     case 'primary':
-      return 'text-primary-500';
+      return 'text-primary-500 hover:font-medium';
     case 'secondary':
-      return 'text-secondary-500';
+      return 'text-secondary-500 hover:font-medium';
     case 'success':
-      return 'text-success-500';
+      return 'text-success-500 hover:font-medium';
     case 'info':
-      return 'text-info-500';
+      return 'text-info-500 hover:font-medium';
     case 'warning':
-      return 'text-warning-500';
+      return 'text-warning-500 hover:font-medium';
     case 'danger':
-      return 'text-danger-500';
+      return 'text-danger-500 hover:font-medium';
   }
 };
 
 const getSoftBgClass = (theme: ButtonTheme): string => {
   switch (theme) {
     case 'primary':
-      return 'bg-primary-100';
+      return 'bg-primary-100 hover:ring-2 hover:ring-primary-300';
     case 'secondary':
-      return 'bg-secondary-100';
+      return 'bg-secondary-100 hover:ring-2 hover:ring-secondary-300';
     case 'success':
-      return 'bg-success-100';
+      return 'bg-success-100 hover:ring-2 hover:ring-success-300';
     case 'info':
-      return 'bg-info-100';
+      return 'bg-info-100 hover:ring-2 hover:ring-info-300';
     case 'warning':
-      return 'bg-warning-100';
+      return 'bg-warning-100 hover:ring-2 hover:ring-warning-300';
     case 'danger':
-      return 'bg-danger-100';
+      return 'bg-danger-100 hover:ring-2 hover:ring-danger-300';
   }
 };
 
