@@ -42,6 +42,9 @@ export const ButtonTheme = [
 ] as const;
 export type ButtonTheme = typeof ButtonTheme[number];
 
+export const ButtonLoadingStyles = ['spinner', 'circle', 'arrow', 'gear'] as const;
+export type ButtonLoadingStyles = typeof ButtonLoadingStyles[number];
+
 export interface ButtonProps {
   variant?: ButtonVariants;
   theme?: ButtonTheme;
@@ -49,15 +52,15 @@ export interface ButtonProps {
   width?: ButtonWidths;
   height?: ButtonHeights;
   rounded?: ButtonRoundedLevels;
+  startIcon?: JSX.Element;
+  endIcon?: JSX.Element;
   classes?: string;
-  leftIcon?: string;
-  rightIcon?: string;
+  children?: string | JSX.Element | JSX.Element[];
   themedShadow?: boolean;
   disabled?: boolean;
   loading?: boolean;
-  children?: string | JSX.Element | JSX.Element[];
-  loadingStyle?: 'spinner' | 'circle' | 'arrow' | 'gear';
-  onClick?: MouseEventHandler<HTMLButtonElement> | undefined;
+  loadingStyle?: ButtonLoadingStyles;
+  onClick?: MouseEventHandler<HTMLButtonElement>;
 }
 
 export const Button: React.FC<ButtonProps> = ({
@@ -72,28 +75,69 @@ export const Button: React.FC<ButtonProps> = ({
   children,
   onClick,
   loadingStyle,
-  leftIcon,
-  rightIcon,
+  startIcon,
+  endIcon,
   disabled,
   loading
 }) => {
+  const finalClasses = twMerge(
+    'flex justify-center items-center',
+    'py-2 px-4',
+    'disabled:opacity-60',
+    getThemeClass(theme, variant),
+    getWidthClass(width),
+    getHeightClass(height),
+    getRoundedClass(rounded),
+    getShadowClass(theme, themedShadow, shadow),
+    getCursorStyle(disabled, loading),
+    classes
+  );
   return (
     <button
+      type="button"
+      disabled={disabled}
       onClick={onClick}
-      className={`${twMerge(
-        `flex justify-center items-center p-2 hover:font-medium
-    ${getThemeClass(theme, variant)}
-    ${getWidthClass(width)} 
-    ${getHeightClass(height)} 
-    ${getRoundedClass(rounded)} 
-    ${getShadowClass(theme, themedShadow, shadow)} 
-    `,
-        classes
-      )}`}
+      className={finalClasses}
     >
+      {startIcon && React.cloneElement(startIcon, { className: 'mr-2' })}
       {children}
+      {endIcon &&
+        React.cloneElement(endIcon, {
+          className: `ml-2 ${getLoadingClass(loading, loadingStyle)}`
+        })}
     </button>
   );
+};
+
+const getCursorStyle = (disabled?: boolean, loading?: boolean): string => {
+  if (disabled) {
+    return 'hover:ring-0 cursor-not-allowed';
+  }
+  if (loading) {
+    return 'hover:ring-0 cursor-progress';
+  }
+  return '';
+};
+
+const getLoadingClass = (
+  loading?: boolean,
+  loadingStyle?: ButtonLoadingStyles
+): string => {
+  if (!loading) {
+    return '';
+  }
+  switch (loadingStyle) {
+    case 'spinner':
+      return 'animate-spin';
+    case 'circle':
+      return 'animate-ping';
+    case 'arrow':
+      return 'animate-pulse';
+    case 'gear':
+      return 'animate-pulse';
+    default:
+      return '';
+  }
 };
 
 const getRoundedClass = (roundedLevel?: ButtonRoundedLevels): string => {
@@ -175,47 +219,49 @@ const getShadowClass = (
 const getThemeClass = (theme: ButtonTheme, variant: ButtonVariants): string => {
   switch (variant) {
     case 'soft':
-      return `${getSoftBgClass(theme)} ${getTextColorClass(theme)}`;
+      return `hover:ring-2
+      ${getSoftBgClass(theme)} ${getTextColorClass(theme)}`;
     case 'bordered':
-      return `border ${getBorderColorClass(theme)} ${getTextColorClass(theme)}`;
+      return `border hover:ring-2 
+      ${getBorderColorClass(theme)} ${getTextColorClass(theme)}`;
     case 'text':
-      return `${getTextColorClass(theme)}`;
+      return `hover:font-medium ${getTextColorClass(theme)}`;
     default:
-      return `${getBgColorClass(theme)} text-white`;
+      return `hover:ring-2 text-white ${getBgColorClass(theme)}`;
   }
 };
 
 const getBorderColorClass = (theme: ButtonTheme): string => {
   switch (theme) {
     case 'primary':
-      return 'border-primary-500 hover:ring-2 hover:ring-primary-400';
+      return 'border-primary-500 hover:ring-primary-400';
     case 'secondary':
-      return 'border-secondary-500 hover:ring-2 hover:ring-secondary-400';
+      return 'border-secondary-500 hover:ring-secondary-400';
     case 'success':
-      return 'border-success-500 hover:ring-2 hover:ring-success-400';
+      return 'border-success-500 hover:ring-success-400';
     case 'info':
-      return 'border-info-500 hover:ring-2 hover:ring-info-400';
+      return 'border-info-500 hover:ring-info-400';
     case 'warning':
-      return 'border-warning-500 hover:ring-2 hover:ring-warning-400';
+      return 'border-warning-500 hover:ring-warning-400';
     case 'danger':
-      return 'border-danger-500 hover:ring-2 hover:ring-danger-400';
+      return 'border-danger-500 hover:ring-danger-400';
   }
 };
 
 const getBgColorClass = (theme: ButtonTheme): string => {
   switch (theme) {
     case 'primary':
-      return 'bg-primary-500 hover:ring-2 hover:ring-primary-500';
+      return 'bg-primary-500 hover:ring-primary-500';
     case 'secondary':
-      return 'bg-secondary-500 hover:ring-2 hover:ring-secondary-500';
+      return 'bg-secondary-500 hover:ring-secondary-500';
     case 'success':
-      return 'bg-success-500 hover:ring-2 hover:ring-success-500';
+      return 'bg-success-500 hover:ring-success-500';
     case 'info':
-      return 'bg-info-500 hover:ring-2 hover:ring-info-500';
+      return 'bg-info-500 hover:ring-info-500';
     case 'warning':
-      return 'bg-warning-500 hover:ring-2 hover:ring-warning-500';
+      return 'bg-warning-500 hover:ring-warning-500';
     case 'danger':
-      return 'bg-danger-500 hover:ring-2 hover:ring-danger-500';
+      return 'bg-danger-500 hover:ring-danger-500';
   }
 };
 
@@ -239,17 +285,17 @@ const getTextColorClass = (theme: ButtonTheme): string => {
 const getSoftBgClass = (theme: ButtonTheme): string => {
   switch (theme) {
     case 'primary':
-      return 'bg-primary-100 hover:ring-2 hover:ring-primary-300';
+      return 'bg-primary-100 hover:ring-primary-300';
     case 'secondary':
-      return 'bg-secondary-100 hover:ring-2 hover:ring-secondary-300';
+      return 'bg-secondary-100 hover:ring-secondary-300';
     case 'success':
-      return 'bg-success-100 hover:ring-2 hover:ring-success-300';
+      return 'bg-success-100 hover:ring-success-300';
     case 'info':
-      return 'bg-info-100 hover:ring-2 hover:ring-info-300';
+      return 'bg-info-100 hover:ring-info-300';
     case 'warning':
-      return 'bg-warning-100 hover:ring-2 hover:ring-warning-300';
+      return 'bg-warning-100 hover:ring-warning-300';
     case 'danger':
-      return 'bg-danger-100 hover:ring-2 hover:ring-danger-300';
+      return 'bg-danger-100 hover:ring-danger-300';
   }
 };
 

@@ -2,11 +2,13 @@ import React from 'react';
 import {
   Button,
   ButtonHeights,
+  ButtonLoadingStyles,
   ButtonShadowLevels,
   ButtonTheme,
   ButtonVariants,
   ButtonWidths
 } from '@/components/Button';
+import SettingsIcon from '@mui/icons-material/Settings';
 
 export const TopMenuLayout: React.FC = () => {
   return (
@@ -22,12 +24,7 @@ export const TopMenuLayout: React.FC = () => {
           ))
         )}
       </div>
-      <div className="grid grid-cols-3 gap-3 mt-3">
-        {ButtonShadowLevels.map((level) => (
-          <Button key={`${level}`} theme="success" shadow={level}>
-            <span className="capitalize">Shadow {level}</span>
-          </Button>
-        ))}
+      <div className="grid grid-cols-3 gap-3 gap-y-8 mt-3">
         {ButtonTheme.map((theme) =>
           ButtonShadowLevels.map((level) => (
             <Button key={`${level}`} theme={theme} themedShadow shadow={level}>
@@ -47,6 +44,30 @@ export const TopMenuLayout: React.FC = () => {
         {ButtonHeights.map((height) => (
           <Button key={`height--${height}`} theme="info" height={height}>
             <span className="capitalize">Height {height}</span>
+          </Button>
+        ))}
+      </div>
+      <div className="grid grid-cols-4 gap-3 mt-3 content-center">
+        {ButtonLoadingStyles.map((loadingStyle) => (
+          <Button
+            theme="info"
+            endIcon={<SettingsIcon />}
+            loading
+            loadingStyle={loadingStyle}
+          >
+            <span className="capitalize">{loadingStyle}</span>
+          </Button>
+        ))}
+      </div>
+      <div className="grid grid-cols-4 gap-3 mt-3 content-center">
+        {ButtonVariants.map((variant) => (
+          <Button
+            theme="info"
+            endIcon={<SettingsIcon />}
+            disabled
+            variant={variant}
+          >
+            <span className="capitalize">{variant}</span>
           </Button>
         ))}
       </div>

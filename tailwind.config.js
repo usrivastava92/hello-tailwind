@@ -11,6 +11,9 @@ module.exports = {
       roboto: ['Roboto', 'sans-serif']
     },
     extend: {
+      animation: {
+        'animate-spin-slow': 'spin 3s linear infinite',
+      },
       colors: {
         primary: colors.blue,
         secondary: colors.slate,
