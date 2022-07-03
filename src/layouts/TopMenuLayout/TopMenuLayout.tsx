@@ -10,7 +10,7 @@ import {
 
 export const TopMenuLayout: React.FC = () => {
   return (
-    <div className="">
+    <div className="bg-slate-800">
       <div className="grid grid-cols-4 gap-3">
         {ButtonTheme.map((theme) =>
           ButtonVariants.map((variant) => (

@@ -2,10 +2,10 @@ import React, { MouseEventHandler } from 'react';
 import { twMerge } from 'tailwind-merge';
 
 export const ButtonShadowLevels = ['sm', 'md', 'lg'] as const;
-type ButtonShadowLevels = typeof ButtonShadowLevels[number];
+export type ButtonShadowLevels = typeof ButtonShadowLevels[number];
 
 export const ButtonHeights = ['xs', 'sm', 'md', 'lg', 'xl', '2xl'] as const;
-type ButtonHeights = typeof ButtonHeights[number];
+export type ButtonHeights = typeof ButtonHeights[number];
 
 export const ButtonWidths = [
   'xs',
@@ -16,7 +16,7 @@ export const ButtonWidths = [
   '2xl',
   'full'
 ] as const;
-type ButtonWidths = typeof ButtonWidths[number];
+export type ButtonWidths = typeof ButtonWidths[number];
 
 export const ButtonRoundedLevels = [
   'none',
@@ -27,7 +27,7 @@ export const ButtonRoundedLevels = [
   '2xl',
   'full'
 ] as const;
-type ButtonRoundedLevels = typeof ButtonRoundedLevels[number];
+export type ButtonRoundedLevels = typeof ButtonRoundedLevels[number];
 
 export const ButtonVariants = ['bordered', 'soft', 'filled', 'text'] as const;
 export type ButtonVariants = typeof ButtonVariants[number];
@@ -81,7 +81,7 @@ export const Button: React.FC<ButtonProps> = ({
     <button
       onClick={onClick}
       className={`${twMerge(
-        `flex justify-center items-center p-2 
+        `flex justify-center items-center p-2 hover:font-medium
     ${getThemeClass(theme, variant)}
     ${getWidthClass(width)} 
     ${getHeightClass(height)} 
@@ -160,14 +160,13 @@ const getShadowClass = (
   themedShadow?: boolean,
   shadowLevel?: ButtonShadowLevels
 ): string => {
-  const coloredShadowClass = themedShadow ? getShadowColorClass(theme) : '';
   switch (shadowLevel) {
     case 'sm':
-      return `shadow-md ${coloredShadowClass}`;
+      return `shadow-md ${getShadowColorClass(theme)}`;
     case 'md':
-      return `shadow-lg ${coloredShadowClass}`;
+      return `shadow-lg ${getShadowColorClass(theme)}`;
     case 'lg':
-      return `shadow-xl ${coloredShadowClass}`;
+      return `shadow-xl ${getShadowColorClass(theme)}`;
     default:
       return '';
   }
@@ -223,17 +222,17 @@ const getBgColorClass = (theme: ButtonTheme): string => {
 const getTextColorClass = (theme: ButtonTheme): string => {
   switch (theme) {
     case 'primary':
-      return 'text-primary-500 hover:font-medium';
+      return 'text-primary-500';
     case 'secondary':
-      return 'text-secondary-500 hover:font-medium';
+      return 'text-secondary-500';
     case 'success':
-      return 'text-success-500 hover:font-medium';
+      return 'text-success-500';
     case 'info':
-      return 'text-info-500 hover:font-medium';
+      return 'text-info-500';
     case 'warning':
-      return 'text-warning-500 hover:font-medium';
+      return 'text-warning-500';
     case 'danger':
-      return 'text-danger-500 hover:font-medium';
+      return 'text-danger-500';
   }
 };
 
@@ -254,7 +253,7 @@ const getSoftBgClass = (theme: ButtonTheme): string => {
   }
 };
 
-const getShadowColorClass = (theme: ButtonTheme): string => {
+const getShadowColorClass = (theme?: ButtonTheme): string => {
   switch (theme) {
     case 'primary':
       return 'shadow-primary-400';
@@ -268,5 +267,7 @@ const getShadowColorClass = (theme: ButtonTheme): string => {
       return 'shadow-warning-400';
     case 'danger':
       return 'shadow-danger-400';
+    default:
+      return '';
   }
 };
