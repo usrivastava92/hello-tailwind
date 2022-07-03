@@ -42,7 +42,12 @@ export const ButtonTheme = [
 ] as const;
 export type ButtonTheme = typeof ButtonTheme[number];
 
-export const ButtonLoadingStyles = ['spinner', 'circle', 'arrow', 'gear'] as const;
+export const ButtonLoadingStyles = [
+  'spinner',
+  'circle',
+  'arrow',
+  'gear'
+] as const;
 export type ButtonLoadingStyles = typeof ButtonLoadingStyles[number];
 
 export interface ButtonProps {
