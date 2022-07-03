@@ -7,16 +7,39 @@ type ButtonShadowLevels = typeof ButtonShadowLevels[number];
 export const ButtonHeights = ['xs', 'sm', 'md', 'lg', 'xl', '2xl'] as const;
 type ButtonHeights = typeof ButtonHeights[number];
 
-export const ButtonWidths = ['xs', 'sm', 'md', 'lg', 'xl', '2xl', 'full'] as const;
+export const ButtonWidths = [
+  'xs',
+  'sm',
+  'md',
+  'lg',
+  'xl',
+  '2xl',
+  'full'
+] as const;
 type ButtonWidths = typeof ButtonWidths[number];
 
-export const ButtonRoundedLevels = ['none', 'sm', 'md', 'lg', 'xl', '2xl', 'full'] as const;
+export const ButtonRoundedLevels = [
+  'none',
+  'sm',
+  'md',
+  'lg',
+  'xl',
+  '2xl',
+  'full'
+] as const;
 type ButtonRoundedLevels = typeof ButtonRoundedLevels[number];
 
 export const ButtonVariants = ['bordered', 'soft', 'filled', 'text'] as const;
 export type ButtonVariants = typeof ButtonVariants[number];
 
-export const ButtonTheme = ['primary', 'secondary', 'success', 'warning', 'info', 'danger'] as const;
+export const ButtonTheme = [
+  'primary',
+  'secondary',
+  'success',
+  'warning',
+  'info',
+  'danger'
+] as const;
 export type ButtonTheme = typeof ButtonTheme[number];
 
 export interface ButtonProps {
@@ -38,22 +61,22 @@ export interface ButtonProps {
 }
 
 export const Button: React.FC<ButtonProps> = ({
-                                                theme = 'primary',
-                                                variant = 'filled',
-                                                width,
-                                                height,
-                                                shadow,
-                                                rounded,
-                                                themedShadow,
-                                                classes,
-                                                children,
-                                                onClick,
-                                                loadingVariant,
-                                                leftIcon,
-                                                rightIcon,
-                                                disabled,
-                                                loading
-                                              }) => {
+  theme = 'primary',
+  variant = 'filled',
+  width,
+  height,
+  shadow,
+  rounded,
+  themedShadow,
+  classes,
+  children,
+  onClick,
+  loadingVariant,
+  leftIcon,
+  rightIcon,
+  disabled,
+  loading
+}) => {
   const finalClasses = twMerge(
     `flex justify-center items-center p-2 
     ${getThemeClass(theme, variant)}
