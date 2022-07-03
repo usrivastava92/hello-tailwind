@@ -1,7 +1,7 @@
 import React, { MouseEventHandler } from 'react';
 import { twMerge } from 'tailwind-merge';
 
-export const ButtonShadowLevels = ['sm', 'md', 'lg', 'xl', '2xl'] as const;
+export const ButtonShadowLevels = ['sm', 'md', 'lg'] as const;
 type ButtonShadowLevels = typeof ButtonShadowLevels[number];
 
 export const ButtonHeights = ['xs', 'sm', 'md', 'lg', 'xl', '2xl'] as const;
@@ -56,39 +56,38 @@ export interface ButtonProps {
   disabled?: boolean;
   loading?: boolean;
   children?: string | JSX.Element | JSX.Element[];
-  loadingVariant?: 'spinner' | 'circle' | 'arrow' | 'gear';
+  loadingStyle?: 'spinner' | 'circle' | 'arrow' | 'gear';
   onClick?: MouseEventHandler<HTMLButtonElement> | undefined;
 }
 
 export const Button: React.FC<ButtonProps> = ({
-  theme = 'primary',
-  variant = 'filled',
-  width,
-  height,
-  shadow,
-  rounded,
-  themedShadow,
-  classes,
-  children,
-  onClick,
-  loadingVariant,
-  leftIcon,
-  rightIcon,
-  disabled,
-  loading
-}) => {
-  const finalClasses = twMerge(
-    `flex justify-center items-center p-2 
+                                                theme = 'primary',
+                                                variant = 'filled',
+                                                rounded = 'md',
+                                                width,
+                                                height,
+                                                shadow,
+                                                themedShadow,
+                                                classes,
+                                                children,
+                                                onClick,
+                                                loadingStyle,
+                                                leftIcon,
+                                                rightIcon,
+                                                disabled,
+                                                loading
+                                              }) => {
+  return (
+    <button onClick={onClick} className={`${twMerge(
+      `flex justify-center items-center p-2 
     ${getThemeClass(theme, variant)}
     ${getWidthClass(width)} 
     ${getHeightClass(height)} 
     ${getRoundedClass(rounded)} 
     ${getShadowClass(theme, themedShadow, shadow)} 
     `,
-    classes
-  );
-  return (
-    <button onClick={onClick} className={finalClasses}>
+      classes
+    )}`}>
       {children}
     </button>
   );
@@ -158,7 +157,7 @@ const getShadowClass = (
   themedShadow?: boolean,
   shadowLevel?: ButtonShadowLevels
 ): string => {
-  const coloredShadowClass = themedShadow ? `shadow-${theme}-400` : '';
+  const coloredShadowClass = themedShadow ? getShadowColorClass(theme) : '';
   switch (shadowLevel) {
     case 'sm':
       return `shadow-md ${coloredShadowClass}`;
@@ -166,8 +165,6 @@ const getShadowClass = (
       return `shadow-lg ${coloredShadowClass}`;
     case 'lg':
       return `shadow-xl ${coloredShadowClass}`;
-    case 'xl':
-      return `shadow-2xl ${coloredShadowClass}`;
     default:
       return '';
   }
@@ -176,12 +173,97 @@ const getShadowClass = (
 const getThemeClass = (theme: ButtonTheme, variant: ButtonVariants): string => {
   switch (variant) {
     case 'soft':
-      return `bg-${theme}-100 text-${theme}-500`;
+      return `${getSoftBgClass(theme)} ${getTextColorClass(theme)}`;
     case 'bordered':
-      return `border border-${theme}-500 text-${theme}-500`;
+      return `border ${getBorderColorClass(theme)} ${getTextColorClass(theme)}`;
     case 'text':
-      return `text-${theme}-500`;
+      return `${getTextColorClass(theme)}`;
     default:
-      return `bg-${theme}-500 text-white`;
+      return `${getBgColorClass(theme)} text-white`;
+  }
+};
+
+const getBorderColorClass = (theme: ButtonTheme): string => {
+  switch (theme) {
+    case 'primary':
+      return 'border-primary-500';
+    case 'secondary':
+      return 'border-secondary-500';
+    case 'success':
+      return 'border-success-500';
+    case 'info':
+      return 'border-info-500';
+    case 'warning':
+      return 'border-warning-500';
+    case 'danger':
+      return 'border-danger-500';
+  }
+};
+
+const getBgColorClass = (theme: ButtonTheme): string => {
+  switch (theme) {
+    case 'primary':
+      return 'bg-primary-500';
+    case 'secondary':
+      return 'bg-secondary-500';
+    case 'success':
+      return 'bg-success-500';
+    case 'info':
+      return 'bg-info-500';
+    case 'warning':
+      return 'bg-warning-500';
+    case 'danger':
+      return 'bg-danger-500';
+  }
+};
+
+const getTextColorClass = (theme: ButtonTheme): string => {
+  switch (theme) {
+    case 'primary':
+      return 'text-primary-500';
+    case 'secondary':
+      return 'text-secondary-500';
+    case 'success':
+      return 'text-success-500';
+    case 'info':
+      return 'text-info-500';
+    case 'warning':
+      return 'text-warning-500';
+    case 'danger':
+      return 'text-danger-500';
+  }
+};
+
+const getSoftBgClass = (theme: ButtonTheme): string => {
+  switch (theme) {
+    case 'primary':
+      return 'bg-primary-100';
+    case 'secondary':
+      return 'bg-secondary-100';
+    case 'success':
+      return 'bg-success-100';
+    case 'info':
+      return 'bg-info-100';
+    case 'warning':
+      return 'bg-warning-100';
+    case 'danger':
+      return 'bg-danger-100';
+  }
+};
+
+const getShadowColorClass = (theme: ButtonTheme): string => {
+  switch (theme) {
+    case 'primary':
+      return 'shadow-primary-400';
+    case 'secondary':
+      return 'shadow-secondary-400';
+    case 'success':
+      return 'shadow-success-400';
+    case 'info':
+      return 'shadow-info-400';
+    case 'warning':
+      return 'shadow-warning-400';
+    case 'danger':
+      return 'shadow-danger-400';
   }
 };

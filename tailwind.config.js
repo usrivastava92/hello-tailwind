@@ -3,21 +3,23 @@ const colors = require('tailwindcss/colors');
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
+    "./index.html",
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
-    colors: {
-      primary: colors.blue,
-      secondary: colors.slate,
-      success: colors.green,
-      danger: colors.red,
-      warning: colors.yellow,
-      info: colors.blue
-    },
     fontFamily: {
       roboto: ['Roboto', 'sans-serif']
     },
-    extend: {}
+    extend: {
+      colors: {
+        primary: colors.blue,
+        secondary: colors.slate,
+        success: colors.green,
+        danger: colors.red,
+        warning: colors.yellow,
+        info: colors.blue,
+      },
+    }
   },
   plugins: [
     require('@tailwindcss/typography'),
