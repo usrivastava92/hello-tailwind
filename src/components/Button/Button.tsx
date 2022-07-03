@@ -133,7 +133,7 @@ const getLoadingClass = (
   }
   switch (loadingStyle) {
     case 'spinner':
-      return 'animate-spin';
+      return 'animate-spin-slow';
     case 'circle':
       return 'animate-ping';
     case 'arrow':
@@ -167,17 +167,17 @@ const getRoundedClass = (roundedLevel?: ButtonRoundedLevels): string => {
 const getWidthClass = (width?: ButtonWidths): string => {
   switch (width) {
     case 'xs':
-      return 'w-10';
+      return 'text-xs w-10';
     case 'sm':
-      return 'w-20';
+      return 'text-sm w-20';
     case 'md':
-      return 'w-24';
+      return 'text-md w-24';
     case 'lg':
-      return 'w-32';
+      return 'text-lg w-32';
     case 'xl':
-      return 'w-40';
+      return 'text-xl w-40';
     case '2xl':
-      return 'w-48';
+      return 'text-2xl w-48';
     case 'full':
       return 'w-full';
     default:
@@ -188,17 +188,17 @@ const getWidthClass = (width?: ButtonWidths): string => {
 const getHeightClass = (height?: ButtonHeights): string => {
   switch (height) {
     case 'xs':
-      return 'h-4';
+      return 'text-xs h-4';
     case 'sm':
-      return 'h-7';
+      return 'text-sm h-7';
     case 'md':
-      return 'h-10';
+      return 'text-md h-10';
     case 'lg':
-      return 'h-14';
+      return 'text-lg h-14';
     case 'xl':
-      return 'h-20';
+      return 'text-xl h-20';
     case '2xl':
-      return 'h-24';
+      return 'text-2xl h-24';
     default:
       return 'h-fill';
   }
@@ -232,41 +232,41 @@ const getThemeClass = (theme: ButtonTheme, variant: ButtonVariants): string => {
     case 'text':
       return `hover:font-medium ${getTextColorClass(theme)}`;
     default:
-      return `hover:ring-2 text-white ${getBgColorClass(theme)}`;
+      return `text-white ${getBgColorClass(theme)}`;
   }
 };
 
 const getBorderColorClass = (theme: ButtonTheme): string => {
   switch (theme) {
     case 'primary':
-      return 'border-primary-500 hover:ring-primary-400';
+      return 'border-primary-500 hover:ring-primary-500';
     case 'secondary':
-      return 'border-secondary-500 hover:ring-secondary-400';
+      return 'border-secondary-500 hover:ring-secondary-500';
     case 'success':
-      return 'border-success-500 hover:ring-success-400';
+      return 'border-success-500 hover:ring-success-500';
     case 'info':
-      return 'border-info-500 hover:ring-info-400';
+      return 'border-info-500 hover:ring-info-500';
     case 'warning':
-      return 'border-warning-500 hover:ring-warning-400';
+      return 'border-warning-500 hover:ring-warning-500';
     case 'danger':
-      return 'border-danger-500 hover:ring-danger-400';
+      return 'border-danger-500 hover:ring-danger-500';
   }
 };
 
 const getBgColorClass = (theme: ButtonTheme): string => {
   switch (theme) {
     case 'primary':
-      return 'bg-primary-500 hover:ring-primary-500';
+      return 'bg-primary-500 hover:bg-primary-600';
     case 'secondary':
-      return 'bg-secondary-500 hover:ring-secondary-500';
+      return 'bg-secondary-500 hover:bg-secondary-600';
     case 'success':
-      return 'bg-success-500 hover:ring-success-500';
+      return 'bg-success-500 hover:bg-success-600';
     case 'info':
-      return 'bg-info-500 hover:ring-info-500';
+      return 'bg-info-500 hover:bg-info-600';
     case 'warning':
-      return 'bg-warning-500 hover:ring-warning-500';
+      return 'bg-warning-500 hover:bg-warning-600';
     case 'danger':
-      return 'bg-danger-500 hover:ring-danger-500';
+      return 'bg-danger-500 hover:bg-danger-600';
   }
 };
 
@@ -307,17 +307,17 @@ const getSoftBgClass = (theme: ButtonTheme): string => {
 const getShadowColorClass = (theme?: ButtonTheme): string => {
   switch (theme) {
     case 'primary':
-      return 'shadow-primary-400';
+      return 'shadow-primary-500 hover:shadow-primary-600';
     case 'secondary':
-      return 'shadow-secondary-400';
+      return 'shadow-secondary-500 hover:shadow-secondary-600';
     case 'success':
-      return 'shadow-success-400';
+      return 'shadow-success-500 hover:shadow-success-600';
     case 'info':
-      return 'shadow-info-400';
+      return 'shadow-info-500 hover:shadow-info-600';
     case 'warning':
-      return 'shadow-warning-400';
+      return 'shadow-warning-500 hover:shadow-warning-600';
     case 'danger':
-      return 'shadow-danger-400';
+      return 'shadow-danger-500 hover:shadow-danger-600';
     default:
       return '';
   }

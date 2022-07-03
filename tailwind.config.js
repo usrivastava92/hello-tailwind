@@ -12,7 +12,7 @@ module.exports = {
     },
     extend: {
       animation: {
-        'animate-spin-slow': 'spin 3s linear infinite',
+        'spin-slow': 'spin 2s linear infinite',
       },
       colors: {
         primary: colors.blue,
