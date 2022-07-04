@@ -116,10 +116,10 @@ export const Button: React.FC<ButtonProps> = ({
 
 const getCursorStyle = (disabled?: boolean, loading?: boolean): string => {
   if (disabled) {
-    return 'hover:ring-0 cursor-not-allowed';
+    return 'cursor-not-allowed';
   }
   if (loading) {
-    return 'hover:ring-0 cursor-progress';
+    return 'cursor-progress';
   }
   return '';
 };
@@ -224,13 +224,13 @@ const getShadowClass = (
 const getThemeClass = (theme: ButtonTheme, variant: ButtonVariants): string => {
   switch (variant) {
     case 'soft':
-      return `hover:ring-2
+      return `hover:enabled:ring-2
       ${getSoftBgClass(theme)} ${getTextColorClass(theme)}`;
     case 'bordered':
-      return `border hover:ring-2 
+      return `border hover:enabled:ring-2 
       ${getBorderColorClass(theme)} ${getTextColorClass(theme)}`;
     case 'text':
-      return `hover:font-medium ${getTextColorClass(theme)}`;
+      return `hover:enabled:font-medium ${getTextColorClass(theme)}`;
     default:
       return `text-white ${getBgColorClass(theme)}`;
   }
@@ -256,17 +256,17 @@ const getBorderColorClass = (theme: ButtonTheme): string => {
 const getBgColorClass = (theme: ButtonTheme): string => {
   switch (theme) {
     case 'primary':
-      return 'bg-primary-500 hover:bg-primary-600';
+      return 'bg-primary-500 hover:enabled:bg-primary-600';
     case 'secondary':
-      return 'bg-secondary-500 hover:bg-secondary-600';
+      return 'bg-secondary-500 hover:enabled:bg-secondary-600';
     case 'success':
-      return 'bg-success-500 hover:bg-success-600';
+      return 'bg-success-500 hover:enabled:bg-success-600';
     case 'info':
-      return 'bg-info-500 hover:bg-info-600';
+      return 'bg-info-500 hover:enabled:bg-info-600';
     case 'warning':
-      return 'bg-warning-500 hover:bg-warning-600';
+      return 'bg-warning-500 hover:enabled:bg-warning-600';
     case 'danger':
-      return 'bg-danger-500 hover:bg-danger-600';
+      return 'bg-danger-500 hover:enabled:bg-danger-600';
   }
 };
 

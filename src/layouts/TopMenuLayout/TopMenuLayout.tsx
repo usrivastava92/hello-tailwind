@@ -9,10 +9,14 @@ import {
   ButtonWidths
 } from '@/components/Button';
 import SettingsIcon from '@mui/icons-material/Settings';
+import { Tooltip } from '@/components/Tooltip';
 
 export const TopMenuLayout: React.FC = () => {
   return (
     <div className="p-10 bg-slate-800">
+      <Tooltip content='This is tooltip'>
+        <Button>Tooltip button</Button>
+      </Tooltip>
       <div className="grid grid-cols-4 gap-3">
         {ButtonTheme.map((theme) =>
           ButtonVariants.map((variant) => (
