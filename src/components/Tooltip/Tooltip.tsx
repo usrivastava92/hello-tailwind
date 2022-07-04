@@ -24,7 +24,7 @@ export const Tooltip: React.FC<TooltipProps> = ({
   return (
     <>
       <div
-        className='w-fit'
+        className="w-fit"
         onMouseEnter={() => setHideTooltip(false)}
         onMouseLeave={() => setHideTooltip(true)}
       >
